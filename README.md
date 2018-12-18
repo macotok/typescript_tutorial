@@ -63,6 +63,8 @@ greeter.ts:5:35 - error TS2345: Argument of type 'number[]' is not assignable to
 ある変数について、その変数がどういう型を受け入れるかを指定する
 ※型注釈の先頭を大文字にするのは禁止(String、Number、Boolean)
 
+#### 変数
+
 ```
 let str: string;
 str = '文字列';
@@ -73,6 +75,8 @@ num = 123;
 let bool: boolean;
 bool = true;
 ```
+
+#### 引数/関数の戻り値
 
 型注釈は変数だけでなく、引数やプロパティでも同様に書くことができる
 
@@ -86,7 +90,7 @@ function add(a: number, b: number): number {
 - ```a: number, b:number```は引数の型注釈
 - ```): number {```は関数の戻り値の型注釈
 
-配列を書く場合
+#### 配列
 
 型注釈の書き方は```配列の中身の型 + []```
 
@@ -97,6 +101,23 @@ function doubleAll(arr: number[]): number[] {
 
 doubleAll([1, 2, 3]);
 ```
+
+#### オブジェクト
+
+オブジェクトの型注釈の区切りは```;```になる
+
+``` javascript
+function getLabel(user: {name: string; id: string}): string {
+  return `${user.name}@{user.id}`;
+}
+
+const user = {
+  name: '鈴木',
+  id: 'ichiro123',
+}
+getLabel(user);
+```
+
 
 ### 型推論とは
 
@@ -111,6 +132,33 @@ str = 1;
 変数宣言で```str```にstring型が格納されたので「変数strはstring型である」と推論されます
 この機能を型推論と呼びます
 その値にnumber型を格納しようとするとエラーになる
+
+#### オブジェクト
+
+存在しないプロバティはエラーになる
+
+``` javascript
+const user = {
+  name: '佐藤',
+  id: 'taro123',
+}
+user.address = 'aaa@bb.com';
+
+greeter.ts:20:7 - error TS2339: Property 'address' does not exist on type '{ name: string; id: string; }'.
+```
+
+型推論の時点で型が確定するため違う型を格納しようとするとエラーになる
+
+``` javascript
+const user = {
+  name: '佐藤',
+  id: 'taro123',
+}
+user.name = 123;
+
+greeter.ts:20:1 - error TS2322: Type '123' is not assignable to type 'string'.
+```
+
 
 ## 参考サイト
 
