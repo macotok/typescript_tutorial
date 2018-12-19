@@ -210,6 +210,8 @@ function calculatedTime(hour: number, expr: boolean): string {
   return hour + 'h';
 }
 calculatedTime(1, true);
+
+ error TS2322: Type 'number' is not assignable to type 'string'.
 ```
 
 ## 参考サイト
