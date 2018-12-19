@@ -118,6 +118,29 @@ const user = {
 getLabel(user);
 ```
 
+#### 関数型
+
+``` javascript
+let add: (a: number, b: number) => number;
+add = (a, b) => {
+  return a + b;
+};
+add(2, 3);
+```
+
+### any型
+
+1つの関数が複数の型を返す場合を```any型```という
+any型はコンパイルをすり抜けてエラー検出されないので基本的には使わないようにする
+
+``` javascript
+let v: any;
+
+v = 1;
+v = 'a';
+v = true;
+```
+
 
 ### 型推論とは
 
@@ -159,6 +182,35 @@ user.name = 123;
 greeter.ts:20:1 - error TS2322: Type '123' is not assignable to type 'string'.
 ```
 
+#### 配列
+
+``` javascript
+const array = [0, 1, 2];
+array.map(v => v * 2);
+```
+
+## 型注釈を書いた方がいい理由
+
+修正やリファクタリングをするとき型注釈を書いてるとミスを防げる
+
+``` javascript
+function calculatedTime(hour: number): string {
+  return hour + 'h';
+}
+calculatedTime(1);
+```
+
+新たにif分岐を追加して戻り値を設定したとき、型が違ってエラーが出力される
+
+``` javascript
+function calculatedTime(hour: number, expr: boolean): string {
+  if (expr)  {
+    return hour;
+  }
+  return hour + 'h';
+}
+calculatedTime(1, true);
+```
 
 ## 参考サイト
 
