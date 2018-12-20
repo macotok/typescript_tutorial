@@ -214,6 +214,59 @@ calculatedTime(1, true);
 greeter.ts:56:5 - error TS2322: Type 'number' is not assignable to type 'string'.
 ```
 
+## クラス構文
+
+- TypeScriptはJavaScriptのスーパーセットのためクラス構文を扱える
+- クラスを型として扱ってコンパイルする
+
+### 書き方
+
+- クラス内の先頭にプロパティの型を事前に宣言しないとエラーになる
+- クラスにどんなプロパティが定義されてるかを把握できる
+
+``` javascript
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+```
+
+### 引数プロパティ宣言
+
+- 引数プロパティ宣言でプロパティ宣言を省略できる
+- publicをアクセス修飾子という
+
+
+``` javascript
+class Person {
+  constructor(public name: string, public age: number) {
+  }
+}
+```
+
+### インスタンスメソッド
+
+インスタンスメソッドの戻り値の型注釈
+
+``` javascript
+class Person {
+  constructor(public name: string, public age: number) {
+  }
+
+  say(): string {
+    return `Hello, I'm ${this.name}.`;
+  }
+}
+
+const person = new Person('Bob', 36);
+console.log(person.say());
+```
+
 ## 参考サイト
 
 - [TypeScriptことはじめ](https://app.codegrid.net/series/2017-typescript)
