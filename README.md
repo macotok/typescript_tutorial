@@ -267,6 +267,58 @@ const person = new Person('Bob', 36);
 console.log(person.say());
 ```
 
+### 継承
+
+- 継承元のクラスをスーパークラス。継承したクラスをサブクラスという
+- 共通のプロパティは```super()```を呼び、スーパークラスのコンストラクタに値を渡さなければならない
+
+``` javascript
+class Person {
+  constructor(public name: string, public age: number) {
+  }
+  say(): string {
+    return `Hello, I'm ${this.name}.`;
+  }
+}
+
+class Employee extends Person {
+  constructor(public name: string, public age: number, public location: string) {
+    super(name, age)
+  }
+}
+```
+
+#### 継承サブクラスの扱い
+
+getCardLabel()の引数```person: Person```にはPerson型だけでなく、そのクラスを継承したサブクラスのインスタンスでも受け付ける
+
+``` javascript
+class Person {
+  constructor(public name: string, public age: number) {
+  }
+  say(): string {
+    return `Hello, I'm ${this.name}.`;
+  }
+}
+
+function getCardLabel(person: Person): string {
+  return `[${person.name} (${person.age})]`
+}
+
+class Employee extends Person {
+  constructor(public name: string, public age: number, public location: string) {
+    super(name, age)
+  }
+}
+
+const person = new Person('Bob', 36);
+console.log(getCardLabel(person));
+
+const employee = new Employee('Tom', 32, 'Japan');
+console.log(getCardLabel(employee)); // [Tom (32)]
+```
+
+
 ## 参考サイト
 
 - [TypeScriptことはじめ](https://app.codegrid.net/series/2017-typescript)
